@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.samtools:htsjdk:1.136">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.samtools/htsjdk/1.136/e6951e87e62c06cacd2c8d91a9848f2f05efd918/htsjdk-1.136.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.samtools/htsjdk/1.136/55b9f38e1e5d759cf270f5930d01d3aa0912d5d3/htsjdk-1.136-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
