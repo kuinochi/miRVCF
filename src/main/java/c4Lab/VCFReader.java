@@ -1,10 +1,11 @@
+package c4Lab;
+
 /**
- * This is a VCF reader
+ * This is the VCF reader
  *
  * Created by dungchi on 5/6/16.
  */
 
-package c4Lab;
 
 import htsjdk.variant.variantcontext.VariantContext;
 import htsjdk.variant.vcf.VCFCodec;
@@ -29,36 +30,62 @@ public class VCFReader {
 
 
         // Read input VCF
+
+        // Variables
+
+        // Input file
         BufferedReader schemaReader = new BufferedReader(new FileReader(inVCF));
+
+        // VCF decoder
         VCFCodec vcfCodec = new VCFCodec();
+
+        // Input file line
         String line;
+
+        // Input file -- VCF header line
         String headerLine = "";
+
+        // Input file -- VCF content line
         VariantContext vctx;
+
+        // Read file
         while ((line = schemaReader.readLine()) != null) {
 
-            // Header line start with comment sign
+            //  Header starts with comment sign
             if (line.startsWith("#")) {
-                headerLine = headerLine.concat(line).concat("\n"); // concatenate all the header line
+
+                // Concatenate all the header line into a string
+                headerLine = headerLine.concat(line).concat("\n");
                 continue;
             }
 
-            //VCFHeader header =;
-            //vcfCodec.readActualHeader(new LineIteratorImpl(LineReaderUtil.fromStringReader(
-            //        new StringReader(headerLine), LineReaderUtil.LineReaderOption.SYNCHRONOUS)));
+            // Append header to decoder
+            vcfCodec.readActualHeader(
+                    new LineIteratorImpl(
+                            LineReaderUtil.fromStringReader(
+                                    new StringReader(headerLine), LineReaderUtil.LineReaderOption.SYNCHRONOUS
+                            )
+                    )
+            );
 
-            /*
-            // Variant is stored line by line
+
+            // Read Variant
             if(!line.startsWith("#")) {
+
+                // Decode variant
                 vctx = vcfCodec.decode(line);
+
+                //
+                System.out.println("Locus: chr" + vctx.getContig()+ " start: " + vctx.getStart() + ", end: " + vctx.getEnd());
+
+                //
                 if(vctx.getAlternateAlleles().get(0).length()>100)
                     System.out.println(" length: "+vctx.getAlternateAlleles().get(0).length()+" ref: "+vctx.getReference() +
                             " alt:" + vctx.getAlternateAlleles().get(0) + " GT: " +
                             vctx.getGenotype(vctx.getSampleNamesOrderedByName().get(0)).getGenotypeString() );
 
-
             }
-*/
+
         }
-        System.out.print(headerLine);
     }
 }
